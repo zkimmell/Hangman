@@ -1,165 +1,80 @@
-<html>
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>JavaScript Hangman</title>
+	<meta charset="UTF-8">
+	<title>Coding Bootcamp - Hangman</title>
 
-<script type="text/javascript">
-
-// HangMan II script- By Chris Fortey (http://www.c-g-f.net/)
-// For this and over 400+ free scripts, visit JavaScript Kit- http://www.javascriptkit.com/
-// Please keep notice intact
-
-var can_play = true;
-var words = new Array("CAT", "DOG", "MOUSE", "RABBIT", "HOURSE", "MISSISSIPPI");
-
-var to_guess = "";
-var display_word = "";
-var used_letters = "";
-var wrong_guesses = 0;
-
-
-function selectLetter(l)
-{
-if (can_play == false)
-{
-return;
-}
-
-if (used_letters.indexOf(l) != -1)
-{
-return;
-}
 	
-used_letters += l;
-document.game.usedLetters.value = used_letters;
-	
-if (to_guess.indexOf(l) != -1)
-{
- // correct letter guess
-pos = 0;
-temp_mask = display_word;
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-
-while (to_guess.indexOf(l, pos) != -1)
-{
-pos = to_guess.indexOf(l, pos);			
-end = pos + 1;
-
-start_text = temp_mask.substring(0, pos);
-end_text = temp_mask.substring(end, temp_mask.length);
-
-temp_mask = start_text + l + end_text;
-pos = end;
-}
-
-display_word = temp_mask;
-document.game.displayWord.value = display_word;
-		
-if (display_word.indexOf("#") == -1)
-{
-// won
-alert("Well done, you have won!");
-can_play = false;
-}
-}
-else
-{
-// incortect letter guess
-wrong_guesses += 1;
-eval("document.hm.src=\"hm" + wrong_guesses + ".gif\"");
-		
-if (wrong_guesses == 10)
-{
-// lost
-alert("Sorry, you have lost!");
-can_play = false;
-}
-}
-}
-
-function reset()
-{
-selectWord();
-document.game.usedLetters.value = "";
-used_letters = "";
-wrong_guesses = 0;
-document.hm.src="hmstart.gif";
-}
-
-function selectWord()
-{
-can_play = true;
-random_number = Math.round(Math.random() * (words.length - 1));
-to_guess = words[random_number];
-//document.game.theWord.value = to_guess;
-	
-// display masked word
-masked_word = createMask(to_guess);
-document.game.displayWord.value = masked_word;
-display_word = masked_word;
-}
-
-function createMask(m)
-{
-mask = "";
-word_lenght = m.length;
-
-
-for (i = 0; i < word_lenght; i ++)
-{
-mask += "#";
-}
-return mask;
-}
-
-</script>
 </head>
+<body>
+	
+	
+	<div class="container">
+		
+		<div class="jumbotron">
+			<div class="container">
+				<h1>Coding Bootcamp - Hangman</h1>
+				<h2>Guess the name of students from class!</h2> 
+				<small>Click any letter to begin...</small>
+			</div>
+		</div>
 
-<body onLoad="reset(); return true;">
+		
+		<div class="row">
+			<div class="col-lg-12">
 
+				
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title"><strong>Word to Guess</strong></h3>
+					</div>
+					<div class="panel-body">
+						
+						<h3 id="wordblanks">_ _ _ _ _ _ _ _ _ </h3>
+					</div>
+				</div>
 
-<h1>JavaScript Hangman</h1>
+				
+				<div class="panel panel-default">
+					<div class="panel-body">
 
-<p><img src="hmstart.gif" height="125" width="75" name="hm"></p>
-<form name="game">
-<p>Display Word: <input type="text" name="displayWord"><br>
-Used Letters: <input type="text" name="usedLetters"></p>
-</form>
+					
+						<strong>Wrong Guesses: </strong> <span id="wrongGuesses"></span>
+					</div>
+				</div>
 
-<p><a href="javascript:selectLetter('A');">A</a> | 
-<a href="javascript:selectLetter('B');">B</a> | 
-<a href="javascript:selectLetter('C');">C</a> | 
-<a href="javascript:selectLetter('D');">D</a> | 
-<a href="javascript:selectLetter('E');">E</a> | 
-<a href="javascript:selectLetter('F');">F</a> | 
-<a href="javascript:selectLetter('G');">G</a> | 
-<a href="javascript:selectLetter('H');">H</a> | 
-<a href="javascript:selectLetter('I');">I</a> | 
-<a href="javascript:selectLetter('J');">J</a> | 
-<a href="javascript:selectLetter('K');">K</a> | 
-<a href="javascript:selectLetter('L');">L</a>
-<a href="javascript:selectLetter('M');">M</a><br>
-<a href="javascript:selectLetter('N');">N</a> | 
-<a href="javascript:selectLetter('O');">O</a> | 
-<a href="javascript:selectLetter('P');">P</a> | 
-<a href="javascript:selectLetter('Q');">Q</a> | 
-<a href="javascript:selectLetter('R');">R</a> | 
-<a href="javascript:selectLetter('S');">S</a> | 
-<a href="javascript:selectLetter('T');">T</a> | 
-<a href="javascript:selectLetter('U');">U</a> | 
-<a href="javascript:selectLetter('V');">V</a> | 
-<a href="javascript:selectLetter('W');">W</a> | 
-<a href="javascript:selectLetter('X');">X</a> | 
-<a href="javascript:selectLetter('Y');">Y</a> | 
-<a href="javascript:selectLetter('Z');">Z</a></p>
+				
+				<div class="panel panel-default">
+					<div class="panel-body">
 
-<p><a href="javascript:reset()">Start game / Reset game</a></p>
+						
+						<strong>Guesses Left: </strong> <span id="guessesLeft">9</span>
+					</div>
+				</div>
 
-<hr>
+				<div class="panel panel-default">
+					<div class="panel-body">
 
-<p>To change the words used, find the code that starts 'var words = new Array()'. Words for the game appear inbetween the brakets in double quotes, with a comma sperating the words.</p>
-<p>For exampe to use the words APPLE and PEARS the code would be: var words = new Array(&quot;APPLE&quot;, &quot;PEARS&quot;)</p>
-<p>To use the words APPLE, PEARS and STAIRS  and the code would be: var words = new Array(&quot;APPLE&quot;, &quot;PEARS&quot;, &quot;STAIRS&quot;)</p>
-<p>Words should be in uppercase.</p>
+						
+						<strong>Wins: </strong> <span id="winCounter">0</span>
+					</div>
+				</div>
+
+				<div class="panel panel-default">
+					<div class="panel-body">
+
+						
+						<strong>Losses: </strong> <span id="lossCounter">0</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<script src="logic.js"></script>
 </body>
 </html>
-

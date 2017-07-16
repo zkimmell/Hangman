@@ -1,1 +1,1 @@
-# week-3-game
+This is a JavaScript Hangman application.
